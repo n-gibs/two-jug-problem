@@ -35,15 +35,24 @@ If there is a solution it will print the shortest to the console. If not it will
 
 ## Solution
 
-This Solution uses the Euclidian algorithm. This is based on the principle that the greatest common divisor (GCD) of two numbers does not change if the larger value of the two is replaced by the difference between both numbers. Given two or more numbers the GCD is the greatest number that will divide by all of them.
+First step is to find if this is solvable.
 
-For example
-GCD(2322 and 654) = 6 -> 2322 - 654 = 1668
+ax + by = c is solvable if gcd(a, b) divides by c
 
-GCD(1668, 654) = 6 -> 1668 - 654 = 1014
+Lets take the example above: `10x + 6y = 8 `
 
-GCD(1014, 654) = 6 -> 1014 - 654 = 360
+GCD of 10 and 6 is 2. 8 is also divisible by 2 so we will have a solution
 
-GCD(360, 654) = 6 -> 654 - 360 = 294
+The algorithm runs twice, switching which jug gets filled first. There is a source jug (filled first) and a destination jug.
 
-GCD(360, 294) = 6 ... and so on
+The `while` loop keeps running as long as the target is not hit by either jug.
+
+At the beginning of each run of the loop, the destination jug is filled by the source jug. That amount depends on if the destination jug is empty or not. We can get that number by finding the minimum between the amount in the amount in the source jug and difference between the capacity of the source jug and the amount in the destination jug. Once the transfer is complete we have 4 options depending on the state of the jugs.
+
+1. source jug hits target, dump destination jug and return
+2. destination jug hits target, dump source jug and return
+3. when source jug is empty, fill it up
+4. when destination jug is full, empty it
+
+As we go through these steps, they are added to an array.
+When both options are completed, we return the smaller array of the two and print the array to the console.

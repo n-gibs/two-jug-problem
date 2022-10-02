@@ -12,7 +12,7 @@ def get_sequence(from_capacity:int, to_capacity:int, target:int) -> list:
 
     step = 0
     # start with both jugs empty
-    sequence=[f'{step}. Start J1 (capacity:{from_capacity}) and J2 (capacity:{to_capacity}) empty -> ({0},{0})']
+    sequence=[f'{step}. Start J1 (capacity:{from_capacity}) and J2 (capacity:{to_capacity}) empty -> (0,0)']
 
     # fill up source jug
     from_jug = to_capacity
@@ -22,9 +22,7 @@ def get_sequence(from_capacity:int, to_capacity:int, target:int) -> list:
 
     while to_jug is not target and from_jug is not target:
 
-        # if the destination jug is empty it can be filled completely
-        # if not, it can only be fill up bythe difference between the
-        # capacity and the amount in the jug
+        # the max amount availible to be poured is either the amount in the source jug or the difference between the capacity of the source jug and the amount in the destination jug, which ever is smaller
         max_amt = min(from_jug, from_capacity-to_jug)
 
         #Empty source jug into destination jug
